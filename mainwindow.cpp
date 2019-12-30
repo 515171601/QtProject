@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 	lineAction->setShortcut(tr("Ctrl+L"));
 	lineAction->setStatusTip(tr("绘制线条"));
 
-
 	ellipseAction=new QAction(QIcon("ellipse.gif"),tr("椭圆"),this);
 	ellipseAction->setShortcut(tr("Ctrl+E"));
 	ellipseAction->setStatusTip(tr("绘制椭圆"));
