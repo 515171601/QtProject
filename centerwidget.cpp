@@ -32,6 +32,7 @@ CenterWidget::CenterWidget(QWidget *parent) : QWidget(parent)
 	this->FILL_FLAG=false;
 	return ;
 }
+
 void CenterWidget::paintEvent(QPaintEvent *){
 
 	QPainter p(this);
@@ -56,7 +57,7 @@ void CenterWidget::paintEvent(QPaintEvent *){
 	}
 	p.drawText(50,200,mouseClickInfo);
 	p.drawText(50,300,mousePosInfo);
-	p.drawText(50,300,this->KeyPressInfo);
+	p.drawText(50,250,this->KeyPressInfo);
 }
 void CenterWidget::mousePressEvent(QMouseEvent *e){
 	mouseClickInfo=tr("Mouse Click at: ")+QString::number(e->x())
