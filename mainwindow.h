@@ -13,21 +13,29 @@ class MainWindow : public QMainWindow
 
 public:
 	MainWindow(QWidget *parent = 0);
-	~MainWindow();
+	~MainWindow(){}
 private:
-	CenterWidget *centerWidget; //定义私有指针.
+	CenterWidget *centerWidget;
 
 	QMenu *fileMenu;
 	QMenu *drawMenu;
+	QMenu *colorMenu;
 	QAction *exitAction;
 	QAction *lineAction;
 	QAction *ellipseAction;
 	QAction *rectangleAction;
+	QAction *blackAction;
+	QAction *greenAction;
+	QAction *yellowAction;
+
 	QToolBar *drawToolBar;
 protected slots:
 	void line();
 	void ellipse();
 	void rectangle();
+	void reDrawInBlack();
+	void reDrawInGreen();
+	void reDrawInYellow();
 };
 
 #endif // MAINWINDOW_H
