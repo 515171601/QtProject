@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QStatusBar>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -37,8 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
 	yellowAction=new QAction(QIcon("yellow.png"),tr("黄色"),this);
 	yellowAction->setStatusTip (tr("填充黄色"));
 
+	fillAction=new QAction(tr("填充"),this);
+
 	drawMenu=this->menuBar()->addMenu(tr("绘图"));
 	colorMenu=this->menuBar ()->addMenu (tr("颜色"));
+	fillMenu=this->menuBar ()->addMenu (tr("填充"));
+
 
 	drawMenu->addAction(lineAction);
 	drawMenu->addAction(ellipseAction);
@@ -48,12 +53,15 @@ MainWindow::MainWindow(QWidget *parent)
 	colorMenu->addAction(greenAction);
 	colorMenu->addAction(yellowAction);
 
+	fillMenu->addAction(fillAction);
+
 	drawToolBar=addToolBar(tr("Draw"));
 	drawToolBar->addAction(lineAction);
 	drawToolBar->addAction(ellipseAction);
 	drawToolBar->addAction(rectangleAction);
 
 	statusBar()->show(); //得到底下的状态栏.
+
 	connect(lineAction,SIGNAL(triggered()),this,SLOT(line()));
 	connect(ellipseAction,SIGNAL(triggered()),this,SLOT(ellipse()));
 	connect(rectangleAction,SIGNAL(triggered()),this,SLOT(rectangle()));
@@ -61,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect (blackAction,SIGNAL(triggered()),this,SLOT(reDrawInBlack()));
 	connect (greenAction,SIGNAL(triggered()),this,SLOT(reDrawInGreen()));
 	connect (yellowAction,SIGNAL(triggered()),this,SLOT(reDrawInYellow()));
+	connect (fillAction, SIGNAL(triggered()),this,SLOT(fillColor()));
 }
 
 void MainWindow::line(){
@@ -93,6 +102,19 @@ void MainWindow::reDrawInGreen()
 void MainWindow::reDrawInYellow()
 {
 	centerWidget->setDrawColor (Qt::yellow);
+	centerWidget->update ();
+	return ;
+}
+
+void MainWindow::fillColor()
+{
+	int answer=QMessageBox::question (this, tr("对话框"), tr("是否填充图像"),
+						   QMessageBox::Yes, QMessageBox::No);
+	if(answer==QMessageBox::Yes){
+		centerWidget->setFillOption (true);
+	}else{
+		centerWidget->setFillOption (false);
+	}
 	centerWidget->update ();
 	return ;
 }

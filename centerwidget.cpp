@@ -13,6 +13,12 @@ void CenterWidget::setDrawColor(Qt::GlobalColor color)
 	return ;
 }
 
+void CenterWidget::setFillOption(bool flag)
+{
+	this->FILL_FLAG=flag;
+	return ;
+}
+
 CenterWidget::CenterWidget(QWidget *parent) : QWidget(parent)
 {
 	setMinimumSize(400,400);
@@ -23,13 +29,20 @@ CenterWidget::CenterWidget(QWidget *parent) : QWidget(parent)
 	this->KeyPressInfo=tr("");
 	setFocusPolicy(Qt::StrongFocus);
 	this->DRAW_COLOR=Qt::black;
+	this->FILL_FLAG=false;
 	return ;
 }
 void CenterWidget::paintEvent(QPaintEvent *){
 
 	QPainter p(this);
 	QPen pen(DRAW_COLOR,2,Qt::SolidLine);
-	p.setPen(pen);     QPoint p1(50,50),p2(500,300);
+	QBrush bruch(DRAW_COLOR, Qt::SolidPattern);
+	QPoint p1(50,50),p2(500,300);
+	if(FILL_FLAG){
+		p.setBrush (bruch);
+	}else{
+		p.setPen(pen);
+	}
 	switch(drawType){
 		case 0:
 			p.drawLine(p1,p2);

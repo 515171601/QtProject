@@ -20,6 +20,8 @@ private:
 	QMenu *fileMenu;
 	QMenu *drawMenu;
 	QMenu *colorMenu;
+	QMenu *fillMenu;
+
 	QAction *exitAction;
 	QAction *lineAction;
 	QAction *ellipseAction;
@@ -27,6 +29,7 @@ private:
 	QAction *blackAction;
 	QAction *greenAction;
 	QAction *yellowAction;
+	QAction *fillAction;
 
 	QToolBar *drawToolBar;
 protected slots:
@@ -36,6 +39,7 @@ protected slots:
 	void reDrawInBlack();
 	void reDrawInGreen();
 	void reDrawInYellow();
+	void fillColor();
 };
 
 #endif // MAINWINDOW_H

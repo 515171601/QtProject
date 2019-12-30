@@ -11,6 +11,7 @@ public:
 	void paintEvent(QPaintEvent *);
     void setDrawType(int type);
 	void setDrawColor(Qt::GlobalColor color);
+	void setFillOption(bool flag);
 protected:
 	void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -26,6 +27,7 @@ private:
 	 QString mousePosInfo;
 	 QString KeyPressInfo;
 	 Qt::GlobalColor DRAW_COLOR;
+	 bool FILL_FLAG;
 
 };
 
