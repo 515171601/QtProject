@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QString>
 #include <QDebug>
+#include <ctime>
 #include "mainwindow.h"
 
 LeftWidget::LeftWidget(QWidget *parent) :
@@ -124,9 +125,21 @@ void LeftWidget::startGame()
 	right->setLevel (this->level);
 
 	right->addBall(Ball(400,400,20,0,0,"D:/Git/Commodity/QtProject/yinxian.png"));
+	srand(time(0));
+	int x=0,y=0,sp=0, an=0, r=0;
 	for(unsigned int i=0;i+1<this->level;++i){
-		right->addBall (Ball(5*i,5*i,20,15,30));
+		x=rand()%400;
+		y=rand()%400;
+		sp=5+rand()%15;
+		an=rand()%360;
+		r=10+rand()%30;
+		right->addBall (Ball(x,y,r,sp,an));
 	}
+//	x=rand()%400;
+//	y=rand()%400;
+//	sp=rand()%40;
+//	an=rand()%360;
+//	r=rand()%40;
 	right->addBall(Ball(30,20,30,10,49,"D:/Git/Commodity/QtProject/jingku.png"));
 	return ;
 }

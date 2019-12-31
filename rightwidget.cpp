@@ -8,13 +8,7 @@ RightWidget::RightWidget(QWidget *parent) :
 {
 	setMinimumSize(400,400);
 	balls.clear(); //清空后手工添加 3 个小球，用于测试
-//	addBall(Ball(0,0,20,0,0,"D:/Git/Commodity/QtProject/yinxian.png"));
-//	addBall(Ball(30,0,10,10,49));
-//	addBall(Ball(30,5,15,10,49));
-//	addBall(Ball(30,10,20,10,49));
-//	addBall(Ball(30,15,25,10,49));
-//	addBall(Ball(30,20,30,10,49,"D:/Git/Commodity/QtProject/yinxian.png"));
-
+	return ;
 }
 void RightWidget::paintEvent(QPaintEvent *)
 {
@@ -42,7 +36,7 @@ void RightWidget::updateBalls()  //封装的控制小球移动的接口
 			flag=balls[i].checkCollision(balls[j]);
 			//todo: 这里的5换成level
 			if(flag){
-				if(i==0&&j==this->level){
+				if(i==0&&j==static_cast<int>(this->level)){
 					balls.clear ();
 				}
 			}
@@ -58,7 +52,7 @@ void RightWidget::addBall(const Ball &b){
 //todo: 完善接口
 void RightWidget::moveBall(const int &direction)
 {
-	const double STEP=1;
+	const double STEP=3;
 	if(!balls.isEmpty ()){
 		switch(direction){
 			case Qt::Key_W:		//w
