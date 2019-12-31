@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_LeftWidget_t {
     QByteArrayData data[4];
-    char stringdata0[29];
+    char stringdata0[31];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,12 +30,12 @@ struct qt_meta_stringdata_LeftWidget_t {
 static const qt_meta_stringdata_LeftWidget_t qt_meta_stringdata_LeftWidget = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "LeftWidget"
-QT_MOC_LITERAL(1, 11, 7), // "addBall"
-QT_MOC_LITERAL(2, 19, 0), // ""
-QT_MOC_LITERAL(3, 20, 8) // "stopBall"
+QT_MOC_LITERAL(1, 11, 8), // "stopBall"
+QT_MOC_LITERAL(2, 20, 0), // ""
+QT_MOC_LITERAL(3, 21, 9) // "startGame"
 
     },
-    "LeftWidget\0addBall\0\0stopBall"
+    "LeftWidget\0stopBall\0\0startGame"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,8 +69,8 @@ void LeftWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         LeftWidget *_t = static_cast<LeftWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->addBall(); break;
-        case 1: _t->stopBall(); break;
+        case 0: _t->stopBall(); break;
+        case 1: _t->startGame(); break;
         default: ;
         }
     }

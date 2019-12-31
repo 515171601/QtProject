@@ -1,4 +1,4 @@
-#include "paintlabel.h"
+﻿#include "paintlabel.h"
 #include <QPainter>
 #include <QWidget>
 #include <QColorDialog>
@@ -24,6 +24,7 @@ void PaintLabel::paintEvent(QPaintEvent *event)
         p.setBrush(brush);
         p.drawRect(0,0,this->width(),this->height());//重载，构造一个矩形区域。
      //根据 fillColor 填充 Label 控件，实现颜色预览
+
     }
 void PaintLabel::mousePressEvent(QMouseEvent *e){
         QColor chooseColor=QColorDialog::getColor(fillColor);   //getColor就是弹出对话框，用户选择颜色，返回颜色

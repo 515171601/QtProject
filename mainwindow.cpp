@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 //实例化
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer=new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(timeToShow()));//绑定定时器中的timeout事件到槽方法timeToShow()
-    timer->start(100);//真正触发定时器，100ms触发一次，每次触发会产生timeout消息，再由timeToShow()处理.
+	timer->start(33);//真正触发定时器，100ms触发一次，每次触发会产生timeout消息，再由timeToShow()处理.
 }
 
 MainWindow::~MainWindow()
