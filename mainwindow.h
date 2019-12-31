@@ -1,45 +1,28 @@
-﻿#ifndef MAINWINDOW_H
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "centerwidget.h"
+#include <QTimer>
 #include <QMainWindow>
-#include<QMainWindow>
-#include <QMenu>
-#include <QMenuBar>
-#include <QAction>
-#include <QToolBar>
+#include <QSplitter>
+#include "leftwidget.h"
+#include "rightwidget.h"
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
-	~MainWindow(){}
-private:
-	CenterWidget *centerWidget;
-
-	QMenu *fileMenu;
-	QMenu *drawMenu;
-	QMenu *colorMenu;
-	QMenu *fillMenu;
-
-	QAction *exitAction;
-	QAction *lineAction;
-	QAction *ellipseAction;
-	QAction *rectangleAction;
-	QAction *blackAction;
-	QAction *greenAction;
-	QAction *yellowAction;
-	QAction *fillAction;
-
-	QToolBar *drawToolBar;
+    MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+    //定时器常常定义在mainwindows中。
+    RightWidget* getRightWidget(){return right;}//主窗口类中封装获取右侧窗口的接口(让右侧窗口的指针返回来调用）
+    void StopTimer();  //停止定时器的接口,保持leftwidget的简洁。
+    void resumeTimer();  //重启定时器的接口
 protected slots:
-	void line();
-	void ellipse();
-	void rectangle();
-	void reDrawInBlack();
-	void reDrawInGreen();
-	void reDrawInYellow();
-	void fillColor();
+    void timeToShow();    //QTimer中很重要的功能为start,定时器事件对应的槽方法
+private:
+    LeftWidget *left;//保存左右窗口的指针
+    RightWidget *right;
+    QSplitter *splitter;
+    QTimer *timer;    //定时器对象
 };
 
 #endif // MAINWINDOW_H
