@@ -6,6 +6,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QString>
+#include <QVector>
+#include <string>
 
 class MainWindow;//一个类型（指针，对象不行）的前置声明(在别的地方有定义），通过顶层公共的副窗口，间接获得右侧窗口。不能#include“mainwindows.h",因为相互包含，递归了.
 
@@ -34,6 +36,8 @@ private:
 	QPushButton *startButton,*stopButton;//控制暂停和重新启动.
 
 	QString KeyPressNum;
+
+	QVector<QString> imaginList;
 
 	unsigned int level;
 

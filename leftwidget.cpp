@@ -73,13 +73,29 @@ LeftWidget::LeftWidget(QWidget *parent) :
 	connect(stopButton,SIGNAL(clicked()),this,SLOT(stopBall()));
 	//实现按钮点击事件的槽方法
 
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/bishi.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/huaji.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/lei.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/pen.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/taikaixin.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/kuanghan.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/bugaoxing.png"));
+//	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/guai.jpg"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/yi.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/jingya.png"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/hehe.png"));
+
+
+//	for(auto temp :this->imaginList){
+//		qDebug()<<temp<<'\n';
+//	}
 	return ;
 }
 
 void LeftWidget::keyPressEvent(QKeyEvent *e)
 {
 	RightWidget *right=pmain->getRightWidget();
-	this->KeyPressNum=tr("Key Press : ")+QString::number(e->key());
+	this->KeyPressNum=QString::number(e->key());
 	this->keyPressInfo->setText (KeyPressNum);
 	right->moveBall (e->key ());
 	return ;
@@ -126,14 +142,15 @@ void LeftWidget::startGame()
 
 	right->addBall(Ball(400,400,20,0,0,"D:/Git/Commodity/QtProject/yinxian.png"));
 	srand(time(0));
-	int x=0,y=0,sp=0, an=0, r=0;
+	int x=0,y=0,sp=0, an=0, r=0, ima=0;
 	for(unsigned int i=0;i+1<this->level;++i){
-		x=rand()%400;
-		y=rand()%400;
+		x=rand()%right->getMinX ();
+		y=rand()%right->getMinX ();
 		sp=5+rand()%15;
 		an=rand()%360;
-		r=10+rand()%30;
-		right->addBall (Ball(x,y,r,sp,an));
+		r=15+rand()%25;
+		ima=rand()%(this->imaginList.size ());
+		right->addBall (Ball(x,y,r,sp,an,this->imaginList.at (ima)));
 	}
 //	x=rand()%400;
 //	y=rand()%400;

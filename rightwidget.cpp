@@ -4,9 +4,9 @@
 
 
 RightWidget::RightWidget(QWidget *parent) :
-	QWidget(parent),level(1)
+	QWidget(parent),level(1),minX(800), minY(800)
 {
-	setMinimumSize(400,400);
+	setMinimumSize(800,800);
 	balls.clear(); //清空后手工添加 3 个小球，用于测试
 	return ;
 }
@@ -81,6 +81,16 @@ void RightWidget::setLevel(unsigned int le)
 {
 	this->level=le;
 	return;
+}
+
+int RightWidget::getMinX() const
+{
+	return minX;
+}
+
+int RightWidget::getMinY() const
+{
+	return minY;
 }
 
 

@@ -21,10 +21,14 @@ public:
 	void moveBall(const int &direction);
 	void clearBalls(void);
 	void setLevel(unsigned int le) ;
+	int getMinX() const;
+	int getMinY() const;
+
 private:
-    //Ball ball;//定义小球,单个小球
+	//Ball ball;//定义小球,单个小球
     QList<Ball> balls;//多个小球
 	unsigned int level;
+	const int minX, minY;
 signals:
 
 public slots:
