@@ -25,7 +25,7 @@ LeftWidget::LeftWidget(QWidget *parent) :
 //	colorLabel=new QLabel(this);
 //	colorLabel->setText(tr("颜色:"));
 	levelLabel=new QLabel(this);
-	levelLabel->setText (tr("当前难度:"));
+	levelLabel->setText (tr("当前球数:"));
 	keyPressLabel=new QLabel(this);
 	keyPressLabel->setText (tr("按下的按键:"));
 	keyPressInfo=new QLabel(this);
@@ -80,15 +80,11 @@ LeftWidget::LeftWidget(QWidget *parent) :
 	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/taikaixin.png"));
 	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/kuanghan.png"));
 	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/bugaoxing.png"));
-//	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/guai.jpg"));
+	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/jingku.png"));
 	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/yi.png"));
 	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/jingya.png"));
 	this->imaginList.push_back (QString("D:/Git/Commodity/QtProject/hehe.png"));
 
-
-//	for(auto temp :this->imaginList){
-//		qDebug()<<temp<<'\n';
-//	}
 	return ;
 }
 
@@ -100,23 +96,6 @@ void LeftWidget::keyPressEvent(QKeyEvent *e)
 	right->moveBall (e->key ());
 	return ;
 }
-
-//void LeftWidget::addBall(){
-//	//pmain 是指向主窗口的指针，通过其接口 getRightWidget 获得
-//	//右侧窗口指针，再调用 right 的addBall 接口添加小球
-//	RightWidget *right=pmain->getRightWidget();
-//	double x,y;
-//	double radius,angle,speed;
-//	QColor fillColor;
-//	bool ok;
-//	x=xEdit->text().toDouble(&ok);
-//	y=yEdit->text().toDouble(&ok);
-//	radius=radiusEdit->text().toDouble(&ok);
-//	speed=speedEdit->text().toDouble(&ok);
-//	angle=angleEdit->text().toDouble(&ok);
-//	fillColor=colorPreview->getFillColor();
-//	right->addBall(Ball(x,y,radius,speed,angle));//迂回的办法.
-//}
 
 void LeftWidget::stopBall(){
 	if(stopButton->text()==tr("暂停")){
@@ -146,18 +125,13 @@ void LeftWidget::startGame()
 	for(unsigned int i=0;i+1<this->level;++i){
 		x=rand()%right->getMinX ();
 		y=rand()%right->getMinX ();
-		sp=5+rand()%15;
+		sp=Ball::MIN_SPEED+rand()%(Ball::MAX_SPEED-Ball::MIN_SPEED);
 		an=rand()%360;
 		r=15+rand()%25;
 		ima=rand()%(this->imaginList.size ());
 		right->addBall (Ball(x,y,r,sp,an,this->imaginList.at (ima)));
 	}
-//	x=rand()%400;
-//	y=rand()%400;
-//	sp=rand()%40;
-//	an=rand()%360;
-//	r=rand()%40;
-	right->addBall(Ball(30,20,30,10,49,"D:/Git/Commodity/QtProject/jingku.png"));
+	right->addBall(Ball(30,20,30,Ball::MAX_SPEED,49,"D:/Git/Commodity/QtProject/weiqu.png"));
 	return ;
 }
 

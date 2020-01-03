@@ -25,10 +25,10 @@ public:
 	int getMinY() const;
 
 private:
-	//Ball ball;//定义小球,单个小球
     QList<Ball> balls;//多个小球
 	unsigned int level;
 	const int minX, minY;
+	int frontKey;
 signals:
 
 public slots:

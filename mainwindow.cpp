@@ -3,7 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setWindowTitle("小球碰撞游戏");//标题
+	setWindowTitle("Game");//标题
     splitter=new QSplitter(Qt::Horizontal,this);  //水平切分,水平分割，将来可以嵌套分割。
     left=new LeftWidget(this);//实例化左右窗体
     right=new RightWidget(this);
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer=new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(timeToShow()));//绑定定时器中的timeout事件到槽方法timeToShow()
-	timer->start(33);//真正触发定时器，100ms触发一次，每次触发会产生timeout消息，再由timeToShow()处理.
+	timer->start(this->TIMEOUT);
 }
 
 MainWindow::~MainWindow()
@@ -28,11 +28,19 @@ MainWindow::~MainWindow()
 
 }
 void MainWindow::timeToShow(){//处理定时器
-    right->updateBalls();//调用rightwidget中定义的更新球。各自有各自的职责。
+	right->updateBalls();//调用rightwidget中定义的更新球。各自有各自的职责。
+}
+
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+	QPixmap  pixmap = QPixmap("D:/Git/Commodity/QtProject/background.jpg").scaled(this->size());//pixmap对象
+	QPainter painter(this);
+	painter.drawPixmap(this->rect(), pixmap);//绘制
+	return ;
 }
 void MainWindow::StopTimer(){
     timer->stop();
 }
 void MainWindow::resumeTimer(){
-    timer->start(100);
+	timer->start(this->TIMEOUT);
 }

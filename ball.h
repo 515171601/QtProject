@@ -21,13 +21,17 @@ public:
     void move(); //在指定的方向上移动 1 步
     void checkBoundary();
 
-	void editXY(double newX, double newY);
 	double getRadius(void);
 	double getX(void) const ;
 	double getY(void) const ;
 
+	void editXY(double newX, double newY);
+	void editAngle(double newA);
 	void editspeed(double sX, double sY);
 	void updateXYSpeed(void);
+
+	static const int MAX_SPEED=10, MIN_SPEED=3;
+
 private:
 	double x,y;		//小球的中心为位置
     double radius;  //小球半径

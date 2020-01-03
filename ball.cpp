@@ -9,20 +9,22 @@ Ball::Ball():Ball(40,100,10,10,45,
 }
 Ball::Ball(double xpos, double ypos, double r, double s, double a, QString I)
 	:x(xpos),y(ypos),radius(r),speed(s),angle(a),image(I)
+//	  ,MAX_SPEED(15), MIN_SPEED(5)
 {
 	const double PI=3.14159;
 	this->speedX=speed*std::sin(angle*PI/180);
 	this->speedY=speed*std::cos(angle*PI/180);
+
 	return ;
 }
 void Ball::draw(QPainter *p)
 {
-	QPen pen(Qt::white,1,Qt::SolidLine);
-	p->setPen(pen);
-	QRect r(x-radius,y-radius,radius*2,radius*2);
+//	QPen pen(Qt::white,1,Qt::SolidLine);
+//	p->setPen(pen);
 	//定义坐标,左上角坐标+矩形长宽
-	p->drawEllipse(r);
+//	p->drawEllipse(r);
 
+	QRect r(x-radius,y-radius,radius*2,radius*2);
 	QImage picture(this->image);
 
 	p->drawImage (r,picture);
@@ -72,6 +74,12 @@ void Ball::editXY(double newX, double newY)
 	return ;
 }
 
+void Ball::editAngle(double newA)
+{
+	this->angle+=newA;
+	return ;
+}
+
 double Ball::getRadius()
 {
 	return this->radius;
@@ -79,9 +87,11 @@ double Ball::getRadius()
 
 void Ball::editspeed(double sX, double sY)
 {
+//	限制小球的最大运动速度:
 	const double PI=3.14159;
-	this->speedX+=sX;
-	this->speedY+=sY;
+	this->speedX=(fabs(speedX+sX)>MAX_SPEED)?speedX:speedX+sX;
+	this->speedY=(fabs(speedY+sY)>MAX_SPEED)?speedY:speedY+sY;
+
 	this->speed=sqrt(this->speedX*this->speedX+this->speedY*this->speedY);
 	this->angle=std::atan2(this->speedX, this->speedY)/(2*PI)*360;
 	if(this->angle<0){
@@ -103,7 +113,9 @@ bool Ball::checkCollision(Ball &b){
 	dx=x-b.x;
 	dy=y-b.y;
 	double dis=std::sqrt(dx*dx+dy*dy);
-	if(dis<=radius+b.radius){ //碰撞后只是交换速度和角度
+	if(dis<=radius+b.radius){
+//		碰撞后只是交换速度和角度
+
 //		删除原有的阻尼系统
 //		b.speed*=0.99;
 //		b.speed=b.speed<0.1?0:b.speed;
@@ -120,11 +132,15 @@ bool Ball::checkCollision(Ball &b){
 		updateXYSpeed ();
 		b.updateXYSpeed ();
 
-		if(fabs (angle-b.angle)<3){
+		if(fabs (angle-b.angle)<10.0){
+			this->editAngle (5);
+			b.editAngle (-5);
 			this->editXY (this->radius, this->radius);
 			b.editXY (-b.getRadius (),-b.getRadius ());
 		}
-		if(fabs(b.speed-speed)<1){
+		if(fabs(b.speed-speed)<2.0){
+			this->editAngle (5);
+			b.editAngle (-5);
 			this->editXY (this->radius, this->radius);
 			b.editXY (-b.getRadius (),-b.getRadius ());
 		}

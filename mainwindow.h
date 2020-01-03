@@ -3,6 +3,7 @@
 #include <QTimer>
 #include <QMainWindow>
 #include <QSplitter>
+#include <QPixmap>
 #include "leftwidget.h"
 #include "rightwidget.h"
 class MainWindow : public QMainWindow
@@ -20,10 +21,13 @@ public:
 protected slots:
     void timeToShow();    //QTimer中很重要的功能为start,定时器事件对应的槽方法
 private:
-    LeftWidget *left;//保存左右窗口的指针
+	void paintEvent(QPaintEvent* event);
+	LeftWidget *left;//保存左右窗口的指针
     RightWidget *right;
     QSplitter *splitter;
     QTimer *timer;    //定时器对象
+//	QPixmap *background;
+	static const int TIMEOUT=17;
 };
 
 #endif // MAINWINDOW_H

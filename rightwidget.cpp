@@ -1,10 +1,11 @@
 ﻿#include "rightwidget.h"
 #include "leftwidget.h"
 #include <QPainter>
+#include <QDebug>
 
 
 RightWidget::RightWidget(QWidget *parent) :
-	QWidget(parent),level(1),minX(800), minY(800)
+	QWidget(parent),level(1),minX(800), minY(800), frontKey(0)
 {
 	setMinimumSize(800,800);
 	balls.clear(); //清空后手工添加 3 个小球，用于测试
@@ -13,11 +14,8 @@ RightWidget::RightWidget(QWidget *parent) :
 void RightWidget::paintEvent(QPaintEvent *)
 {
 	QPainter p(this);//需要在不同类之间传参，不能在ball里面定义
-
-
 	for(auto& b:balls){
 		b.draw(&p);//C++11特性，循环，对容器中对每个元素进行快速遍历.
-
 	}
 }
 void RightWidget::updateBalls()  //封装的控制小球移动的接口
@@ -56,17 +54,63 @@ void RightWidget::moveBall(const int &direction)
 	if(!balls.isEmpty ()){
 		switch(direction){
 			case Qt::Key_W:		//w
-				balls.front ().editspeed (0,-STEP);
+				if(frontKey==Qt::Key_D){
+					balls.front ().editspeed (STEP,-STEP);
+				}else if(frontKey==Qt::Key_A){
+					balls.front ().editspeed (-STEP,-STEP);
+				}else{
+					balls.front ().editspeed (0,-STEP);
+				}
+				frontKey=direction;
+//				qDebug()<<QString::number (frontKey);
 				break;
 			case Qt::Key_S:		//s
-				balls.front ().editspeed (0,STEP);
+				if(frontKey==Qt::Key_D){
+					balls.front ().editspeed (STEP,STEP);
+				}else if(frontKey==Qt::Key_A){
+					balls.front ().editspeed (-STEP,STEP);
+				}else{
+					balls.front ().editspeed (0,STEP);
+				}
+				frontKey=direction;
+//				qDebug()<<QString::number (frontKey);
 				break;
 			case Qt::Key_A:		//a
-				balls.front ().editspeed (-STEP,0);
+				if(frontKey==Qt::Key_W){
+					balls.front ().editspeed (-STEP,-STEP);
+				}else if(frontKey==Qt::Key_S){
+					balls.front ().editspeed (-STEP,STEP);
+				}else if(frontKey==Qt::Key_A){
+					balls.front ().editspeed (-STEP,0);
+				}
+				frontKey=direction;
+//				qDebug()<<QString::number (frontKey);
 				break;
 			case Qt::Key_D:		//d
-				balls.front ().editspeed (STEP,0);
+				if(frontKey==Qt::Key_W){
+					balls.front ().editspeed (STEP,-STEP);
+				}else if(frontKey==Qt::Key_S){
+					balls.front ().editspeed (STEP,STEP);
+				}else{
+					balls.front ().editspeed (STEP,0);
+				}
+				frontKey=direction;
+//				qDebug()<<QString::number (frontKey);
 				break;
+//			case Qt::Key_I:
+
+//				break;
+//			case Qt::Key_K:
+
+//				break;
+//			case Qt::Key_J:
+
+//				break;
+//			case Qt::Key_L:
+
+//				break;
+
+
 		}
 	}
 }
