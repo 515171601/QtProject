@@ -137,6 +137,11 @@ int RightWidget::getMinY() const
 	return minY;
 }
 
+Ball &RightWidget::getLastBall()
+{
+	return this->balls.back ();
+}
+
 
 
 //预留给别的接口

@@ -23,6 +23,7 @@ public:
 	void setLevel(unsigned int le) ;
 	int getMinX() const;
 	int getMinY() const;
+	Ball &getLastBall() ;
 
 private:
     QList<Ball> balls;//多个小球

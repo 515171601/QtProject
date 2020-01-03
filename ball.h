@@ -24,6 +24,7 @@ public:
 	double getRadius(void);
 	double getX(void) const ;
 	double getY(void) const ;
+	QString getImage() const;
 
 	void editXY(double newX, double newY);
 	void editAngle(double newA);
@@ -32,9 +33,11 @@ public:
 
 	static const int MAX_SPEED=10, MIN_SPEED=3;
 
+	void setImage(const QString &value);
+
 private:
 	double x,y;		//小球的中心为位置
-    double radius;  //小球半径
+	double radius;  //小球半径
 	double speed;	//小球的和速度
 	double speedX;  //小球速度在X方向的分量
 	double speedY;  //小球速度在Y方向的分量

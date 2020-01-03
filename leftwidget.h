@@ -24,7 +24,7 @@ private:
 	MainWindow *pmain;  //指向主窗口的指针
 
 	QLabel *keyPressLabel,*keyPressInfo,
-	*levelLabel;
+	*levelLabel, *targetLabel, *targetPicture;
 //	*xLabel,*yLabel,*radiusLabel,
 //	*speedLabel,*angleLabel,*colorLabel,//都是指针.
 

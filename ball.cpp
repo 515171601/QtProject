@@ -108,6 +108,16 @@ void Ball::updateXYSpeed()
 	return ;
 }
 
+QString Ball::getImage() const
+{
+	return image;
+}
+
+void Ball::setImage(const QString &value)
+{
+	image = value;
+}
+
 bool Ball::checkCollision(Ball &b){
 	double dx,dy;
 	dx=x-b.x;
