@@ -1,5 +1,6 @@
 ﻿#ifndef LEFTWIDGET_H
 #define LEFTWIDGET_H
+
 #include "paintlabel.h"
 #include <QWidget>
 #include <QLabel>
@@ -9,44 +10,47 @@
 #include <QVector>
 #include <string>
 
-class MainWindow;//一个类型（指针，对象不行）的前置声明(在别的地方有定义），通过顶层公共的副窗口，间接获得右侧窗口。不能#include“mainwindows.h",因为相互包含，递归了.
+//MainWindow的前置类型声明, 告诉编译器有这么一个类, 但是定义在别处
+//由于MainWindow函数中include了leftwidget.h, 所以这里不能递归include
+class MainWindow;
 
 class LeftWidget : public QWidget
 {
+//Qt的一个宏
 	Q_OBJECT
 public:
+//默认构造函数
 	explicit LeftWidget(QWidget *parent = 0);
+
+//键盘按下事件的处理函数:
 	void keyPressEvent(QKeyEvent *e);
+	void keyReleaseEvent (QKeyEvent *e);
 
 signals:
 
 private:
-	MainWindow *pmain;  //指向主窗口的指针
+//指向主窗口的指针
+	MainWindow *pmain;
 
+//各个标签, 用于显示信息:
 	QLabel *keyPressLabel,*keyPressInfo,
 	*levelLabel, *targetLabel, *targetPicture;
-//	*xLabel,*yLabel,*radiusLabel,
-//	*speedLabel,*angleLabel,*colorLabel,//都是指针.
-
+//调节难度的编辑框:
 	QLineEdit *levelEdit;
-//	*xEdit,*yEdit,*radiusEdit,*speedEdit,*angleEdit;
 
-//	PaintLabel *colorPreview;//增加标签的指针。预览颜色
-
-	QPushButton *startButton,*stopButton;//控制暂停和重新启动.
-
+//控制暂停和重新启动的按钮:
+	QPushButton *startButton,*stopButton;
+//储存摁下键盘的键盘号, 主要用于调试:
 	QString KeyPressNum;
-
+//储存加载的表情:
 	QVector<QString> imaginList;
-
+//储存当前的难度:
 	unsigned int level;
 
-
+//开始游戏和暂停游戏的槽函数:
 public slots:
-//	void addBall();   //添加小球
-	void stopBall();    //控制定时器的启动与暂停
-	void startGame(void);
-	//定义按钮点击事件的槽方法,添加小球与暂停.
+	void stopBall();		//控制游戏的启动与暂停
+	void startGame(void);	//重新设置表情并开始游戏
 };
 
 #endif // LEFTWIDGET_H
